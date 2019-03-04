@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ggq.dao.test_plus">
+    <!--
+    为我们的emp来制定自定义映射规则，数据库中的那个列对应bean中的那个属性
+    type：指定要自定义映射的bean
+    id ：用来标识
+
+    -->
+    <resultMap type="emp" id="myemp">
+        <!--指定主键-->
+        <id column="month" property="money"/>
+        <result column="money" property="month"/>
+    </resultMap>
+
+    <select id="getMoreOnone" resultMap="myemp">
+        select *
+        from test_casc
+        where money > #{money}
+    </select>
+
+
+</mapper>

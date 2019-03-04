@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ggq.dao.TestMapper">
+        <select id="getTestByMoney" resultType="emp">
+            select *
+            from test_casc
+            where money = #{money}
+        </select>
+
+        <update id="updateTest">
+            update test_casc
+            set name = #{name}
+            where money = #{money}
+        </update>
+
+        <delete id="deleteTest">
+            delete
+            from test_casc
+            where money = #{id}
+        </delete>
+        <!--
+        如果在插入后要查询自增的主键，可以使用useGeneratedKeys="true" keyProperty=""
+        将自增的值填充到制定的字段中。
+        -->
+        <insert id="insertTest" useGeneratedKeys="true" keyProperty="">
+            # 使用selectkey 标签可以在sql语句执行之前或者执行之后，执行指定的sql语句并填充到指定的字段中。
+            <!--<selectKey order="">-->
+
+            <!--</selectKey>-->
+            insert into test_casc value(#{name},#{month},#{money})
+        </insert>
+        <!--
+        注意如果返回的是列表，那么返回类型中要写的是list列表中的元素的类型
+        -->
+        <select id="getTestLike" resultType="emp">
+            select *
+            from test_casc
+            where money > #{money}
+        </select>
+        <!--
+        如果是返回值是Map，那么这里返回类型就需要写map
+        -->
+        <select id="getTestByMap" resultType="map">
+            select *
+            from test_casc
+            where money = #{money}
+
+        </select>
+        <!--
+        对应要返回多个封装成一个map的情况
+        -->
+        <select id="getTestByMoneyReturnMap" resultType="emp">
+            select *
+            from test_casc
+            where money > #{money}
+        </select>
+</mapper>
